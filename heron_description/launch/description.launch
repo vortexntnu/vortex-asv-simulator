@@ -1,0 +1,33 @@
+<launch>
+
+  <arg name="hydro_debug" default="0" />
+  <arg name="config" default="base" />
+  <arg name="simulation" default="false" />
+
+  <!-- Vehicle's namespace -->
+  <arg name="namespace" default=""/>
+
+  <group ns="/$(arg namespace)">
+
+    <group if="$(eval namespace == '')">
+      <param name="robot_description"
+             command="$(find heron_vortex_description)/scripts/env_run $(find heron_vortex_description)/urdf/configs/$(arg config)
+                      $(find xacro)/xacro '$(find heron_vortex_description)/urdf/heron.urdf.xacro'
+                      debug:=$(arg hydro_debug) simulation:=$(arg simulation)" />
+    </group>
+
+    <group unless="$(eval namespace == '')">
+      <param name="robot_description"
+             command="$(find heron_vortex_description)/scripts/env_run $(find heron_vortex_description)/urdf/configs/$(arg config)
+                      $(find xacro)/xacro '$(find heron_vortex_description)/urdf/heron.urdf.xacro'
+                      debug:=$(arg hydro_debug) simulation:=$(arg simulation)
+                      namespace:=$(arg namespace) suffix_ns:=$(arg namespace)/" />
+    </group>
+
+    <!-- A joint state publisher plugin already is started with the model, no need to use the default joint state publisher -->
+
+    <!-- Publish robot model for ROS -->
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" respawn="true" output="screen" />
+  </group>
+
+</launch>

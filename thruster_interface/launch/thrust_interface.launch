@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<launch>
+  <!-- This file is only used for debugging purposes. See spawn_base_heron for the actual launch-->
+  <!-- Thruster interface to work with the Vortex-ASV allocator -->
+  <node name="thruster_interface" pkg="thruster_interface" type="thruster_interface_node.py" output="screen"/>
+</launch>

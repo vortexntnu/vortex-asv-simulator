@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+<!--
+Copyright (c) 2012-2016, Clearpath Robotics
+All rights reserved.
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:
+    * Redistributions of source code must retain the above copyright
+      notice, this list of conditions and the following disclaimer.
+    * Redistributions in binary form must reproduce the above copyright
+      notice, this list of conditions and the following disclaimer in the
+      documentation and/or other materials provided with the distribution.
+    * Neither the name of Clearpath Robotics nor the
+      names of its contributors may be used to endorse or promote products
+      derived from this software without specific prior written permission.
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDERS BE LIABLE FOR ANY
+DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+This program contains the description of the robot base model for the Clearpath Heron
+-->
+
+<robot name="heron" xmlns:xacro="http://www.ros.org/wiki/xacro" >
+  <xacro:arg name="debug" default="0"/>
+  <xacro:arg name="namespace" default=""/>
+  <xacro:arg name="suffix_ns" default="$(arg namespace)"/>
+
+  <!-- Include the ROV macro file -->
+  <xacro:include filename="$(find heron_vortex_description)/urdf/base.xacro"/>
+  <xacro:include filename="$(find heron_vortex_description)/urdf/gazebo.xacro"/>
+
+  <!-- Create the heron -->
+  <xacro:heron_base namespace="$(arg suffix_ns)">
+    <!-- The underwater object plugin is given as an input block parameter to
+     allow the addition of external models of manipulator units -->
+    <gazebo>
+      <plugin name="uuv_plugin" filename="libuuv_underwater_object_ros_plugin.so">
+        <fluid_density>1028.0</fluid_density>
+        <flow_velocity_topic>hydrodynamics/current_velocity</flow_velocity_topic>
+        <debug>$(arg debug)</debug>
+        <!-- Adding the hydrodynamic and hydrostatic parameters for the vehicle-->
+        <xacro:heron_hydro_model namespace="$(arg suffix_ns)" />
+        <!--
+          In case other modules are added to the vehicle (such as a manipulator)
+          that also have link running with the underwater object plugin, they
+          should also be added in this block. For this, this new module should
+          have a file similar to gazebo.xacro above with the description of the
+          parameter necessary for the underwater object plugin to be initialized.
+        -->
+      </plugin>
+
+    </gazebo>
+
+  </xacro:heron_base>
+
+  <!-- Joint state publisher plugin -->
+  <gazebo>
+    <plugin name="joint_state_publisher" filename="libuuv_joint_state_publisher.so">
+      <robotNamespace>/$(arg namespace)</robotNamespace>
+      <updateRate>10</updateRate>
+    </plugin>
+  </gazebo>
+
+</robot>

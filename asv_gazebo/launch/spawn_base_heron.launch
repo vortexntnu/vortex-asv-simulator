@@ -60,8 +60,8 @@ ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSI
 
   <!-- Launches Heron's description nodes -->
   <param name="robot_description"
-        command="$(find heron_vortex_description)/launch/env_run $(find heron_vortex_description)/urdf/configs/base
-                $(find xacro)/xacro '$(find heron_vortex_description)/urdf/heron.urdf.xacro'
+        command="$(find asv_gazebo)/launch/env_run $(find asv_gazebo)/urdf/configs/base
+                $(find xacro)/xacro '$(find asv_gazebo)/urdf/heron.urdf.xacro'
                 debug:=0 simulation:=true" />
 
   <!-- Publish robot model for ROS -->

@@ -1,13 +1,15 @@
-# Heron USV Simulation
+# Vortex ASV simulator
+
+This simulator is based on the Heron USV, and is a temporary simulator used until the ROS2 migration. Since the simulator requires melodic, it will run in an ubuntu 18 container.
 
 ## Installation
 Use the included docker-compose for easy container setup :)
 
 ## Running the Simulation
-To simulate the Heron and the world, run the following command:
-```roslaunch heron_gazebo heron_world.launch```
+To simulate the ASV and the world, run the following command:
+```roslaunch asv_gazebo asv_world.launch ```
 
-## Control
+## Docs from the Heron USV:
 
 The Heron is controlled used interactive markers in RViz. One control drives the Heron forward/backward. The other control causes rotation. There are quite a number of transform frames from which to control the Heron.
 

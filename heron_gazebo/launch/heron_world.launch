@@ -87,7 +87,7 @@ ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSI
 
 
   <!-- Start simulating a Heron -->
-  <include file="$(find heron_vortex_gazebo)/launch/spawn_base_heron.launch">
+  <include file="$(find asv_gazebo)/launch/spawn_base_heron.launch">
     <arg name="x" value="$(arg x)" />
     <arg name="y" value="$(arg y)" />
     <arg name="yaw" value="$(arg yaw)" />

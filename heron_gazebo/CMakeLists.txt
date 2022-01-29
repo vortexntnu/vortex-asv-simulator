@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.0.2)
-project(heron_vortex_gazebo)
+project(asv_gazebo)
 
 find_package(catkin REQUIRED)
 

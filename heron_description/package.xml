@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <package format="2">
-  <name>heron_vortex_description</name>
+  <name>asv_description</name>
   <version>0.3.4</version>
   <description>URDF description for Heron</description>
 

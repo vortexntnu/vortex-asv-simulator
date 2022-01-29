@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <package>
-  <name>heron_vortex_gazebo</name>
+  <name>asv_gazebo</name>
   <version>0.3.3</version>
   <description>Simulator package for Heron</description>
 

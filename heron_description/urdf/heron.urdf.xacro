@@ -31,8 +31,8 @@ This program contains the description of the robot base model for the Clearpath 
   <xacro:arg name="suffix_ns" default="$(arg namespace)"/>
 
   <!-- Include the ROV macro file -->
-  <xacro:include filename="$(find heron_vortex_description)/urdf/base.xacro"/>
-  <xacro:include filename="$(find heron_vortex_description)/urdf/gazebo.xacro"/>
+  <xacro:include filename="$(find asv_description)/urdf/base.xacro"/>
+  <xacro:include filename="$(find asv_description)/urdf/gazebo.xacro"/>
 
   <!-- Create the heron -->
   <xacro:heron_base namespace="$(arg suffix_ns)">

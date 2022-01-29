@@ -11,15 +11,15 @@
 
     <group if="$(eval namespace == '')">
       <param name="robot_description"
-             command="$(find heron_vortex_description)/scripts/env_run $(find heron_vortex_description)/urdf/configs/$(arg config)
-                      $(find xacro)/xacro '$(find heron_vortex_description)/urdf/heron.urdf.xacro'
+             command="$(find asv_description)/scripts/env_run $(find asv_description)/urdf/configs/$(arg config)
+                      $(find xacro)/xacro '$(find asv_description)/urdf/heron.urdf.xacro'
                       debug:=$(arg hydro_debug) simulation:=$(arg simulation)" />
     </group>
 
     <group unless="$(eval namespace == '')">
       <param name="robot_description"
-             command="$(find heron_vortex_description)/scripts/env_run $(find heron_vortex_description)/urdf/configs/$(arg config)
-                      $(find xacro)/xacro '$(find heron_vortex_description)/urdf/heron.urdf.xacro'
+             command="$(find asv_description)/scripts/env_run $(find asv_description)/urdf/configs/$(arg config)
+                      $(find xacro)/xacro '$(find asv_description)/urdf/heron.urdf.xacro'
                       debug:=$(arg hydro_debug) simulation:=$(arg simulation)
                       namespace:=$(arg namespace) suffix_ns:=$(arg namespace)/" />
     </group>

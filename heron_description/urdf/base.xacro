@@ -11,7 +11,7 @@
   <xacro:property name="rho" value="1028"/>
 
   <!-- Loading vehicle's specific macros -->
-  <xacro:include filename="$(find heron_vortex_description)/urdf/snippets.xacro"/>
+  <xacro:include filename="$(find asv_description)/urdf/snippets.xacro"/>
 
   <material name="gray"><color rgba="0.7 0.7 0.7 1.0"/></material>
   <material name="dark_gray"><color rgba="0.2 0.2 0.2 1.0"/></material>
@@ -38,7 +38,7 @@
         <visual>
           <origin xyz="0 0 0" rpy="0 0 0" />
           <geometry>
-            <mesh filename="package://heron_vortex_description/meshes/${side}_panel.stl" />
+            <mesh filename="package://asv_description/meshes/${side}_panel.stl" />
           </geometry>
           <material name="yellow" />
         </visual>
@@ -63,7 +63,7 @@
         <visual>
           <origin xyz="0 0 0" rpy="0 0 0"/>
           <geometry>
-            <mesh filename="package://heron_vortex_description/meshes/heron_base.stl" scale="1 1 1" />
+            <mesh filename="package://asv_description/meshes/heron_base.stl" scale="1 1 1" />
           </geometry>
           <material name="dark_gray" />
         </visual>
@@ -71,7 +71,7 @@
         <collision>
           <origin xyz="0 0 0" rpy="0 0 0"/>
           <geometry>
-            <mesh filename="package://heron_vortex_description/meshes/heron_collision.stl" scale="1 1 1" />
+            <mesh filename="package://asv_description/meshes/heron_collision.stl" scale="1 1 1" />
           </geometry>
         </collision>
       </link>
@@ -131,13 +131,13 @@
     
 
     <!-- Include the sensor modules -->
-    <xacro:include filename="$(find heron_vortex_description)/urdf/sensors.xacro"/>
+    <xacro:include filename="$(find asv_description)/urdf/sensors.xacro"/>
 
 
     <xacro:panel namespace="$(arg suffix_ns)" side="left" location="1" />
     <xacro:panel namespace="$(arg suffix_ns)" side="right" location="-1" />
 
-    <xacro:include filename="$(find heron_vortex_description)/urdf/accessories.urdf.xacro" />
+    <xacro:include filename="$(find asv_description)/urdf/accessories.urdf.xacro" />
 
     <!-- Optional custom includes. -->
     <xacro:include filename="$(optenv HERON_URDF_EXTRAS empty.urdf)" />

@@ -15,7 +15,7 @@
       <visual>
         <origin xyz="0 0 0" rpy="0 0 0" />
         <geometry>
-          <mesh filename="package://heron_vortex_description/meshes/${type}-rear-plate.stl"/>
+          <mesh filename="package://asv_description/meshes/${type}-rear-plate.stl"/>
         </geometry>
         <material name="dark_gray" />
       </visual>

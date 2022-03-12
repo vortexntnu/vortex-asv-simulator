@@ -29,7 +29,7 @@ ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSI
   <arg name="y"     default="0"/>
   <arg name="yaw"   default="0"/>
   
-  <arg name="gui" default="true"/>
+  <arg name="gui" default="false"/>
   <arg name="paused" default="false"/>
   <arg name="set_timeout" default="false"/>
   <arg name="timeout" default="0.0"/>

@@ -3,12 +3,25 @@
 This simulator is based on the Heron USV, and is a temporary simulator used until the ROS2 migration. Since the simulator requires melodic, it will run in an ubuntu 18 container.
 
 ## Installation
-Use the included docker-compose for easy container setup :)
+If you are modifying the simulator, use the provided docker-compose.yml to run.
 
-## Running the Simulation
-To simulate the ASV and the world, run the following command:
-```roslaunch asv_gazebo asv_world.launch ```
+If you are using the simulator to test your vortex-asv code, you may either use the simulator service in the vortex-asv docker-compose file or the command 
 
+```
+docker run --rm --privileged -it --network=host --user vortex -e DISPLAY=":0" ghcr.io/vortexntnu/vortex-asv-simulator:main
+```
+
+## Notes
+There are currently some teething issues with Docker, the GUI and different architectures running the system. This section highlights some of this
+
+1. There appears to be issues with AMD notebook graphics where the GUI simply won't load. The cause of this is unknown. Intel integrated graphics works fine (TM)
+2. Similar issues appear when using dedicated Nvidia graphics. This is to be expected, as Nvidia and Docker are not good friends.
+3. Other uncategorized Xserver issues preventing the GUI from running.
+
+The Gazebo GUI is fairly limited, although it serves as our only means of rendering and interacting with a simulated 3D environment. For all other sanity checking, it may be a better idea to use Foxglove or RViz, which would circumvent all the problems outlined here. The Gazebo GUI can be disabled by passing `gui:=false` to the the `asv_world` launchfile. For Docker, this needs to be an input argument in the entrypoint.sh file, and again a configurable parameter in the compose file. 
+
+<details>
+  <summary>Heron USV documentation</summary>
 ## Docs from the Heron USV:
 
 The Heron is controlled used interactive markers in RViz. One control drives the Heron forward/backward. The other control causes rotation. There are quite a number of transform frames from which to control the Heron.
@@ -130,3 +143,4 @@ In general, the simulation doesn't do well with the vessels outside of the water
 This problem should be fixed but has a tendency to return: The Gazebo tool to apply force/torque can be used, however a large enough force/torque may cause the simulation to crash. This is due to the damping force and Heron's velocity getting caught in an "amplifying loop". That is, the Heron's velocity results in a strong damping force that causes an even larger velocity which results in a stronger damping force, etc. To fix this, reduce the damping force coefficients of the offending axis to near-zero. Then slowly increase the coefficients until the simulation is acting appropriately.
 
 When the Heron's IMU filter initializes, it requires the vessel to be floating on the water, fairly stationary. Therefore, spawning a Heron in the air or inside of another Heron will ruin the initialization. This causes the IMU data to be very incorrect for some time afterwards. Eventually, the data will correct itself and it may be quick but it also may be slow.
+  </details>
